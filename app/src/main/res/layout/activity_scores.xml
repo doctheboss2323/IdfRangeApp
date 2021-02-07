@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_gravity="center"
+tools:context=".scoresActivity"
+android:background="@android:color/darker_gray">
+
+<TextView
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="-1dp"
+    android:layout_marginTop="0dp"
+    android:text="כתוב שם"
+    android:textAlignment="center"
+    android:textColor="#FFFFFF"
+    android:textSize="35sp" />
+
+<Button
+    android:id="@+id/saveData"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="60dp"
+    android:layout_marginRight="24dp"
+    android:text="הוסף מטווח" />
+
+<EditText
+    android:id="@+id/editData"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="6dp"
+    android:layout_marginTop="62dp"
+
+    android:layout_toLeftOf="@+id/saveData"
+    android:inputType="textPersonName" />
+
+<TextView
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="7dp"
+    android:layout_marginTop="127dp"
+    android:scrollbars="vertical"
+    android:textAlignment="center"
+    android:textColor="#FFFFFF"
+    android:textSize="35sp" />
+
+
+</RelativeLayout>
