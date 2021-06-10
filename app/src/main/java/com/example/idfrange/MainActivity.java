@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         startRangeButton=findViewById(R.id.startRangeButton);
 
         //ArrayList <String> names= new ArrayList<String>();
-        names=new String[41];
+        names=new String[40];
 
         namesCounter=0;
 

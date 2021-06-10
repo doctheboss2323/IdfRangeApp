@@ -36,7 +36,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="137dp"
         android:layout_toLeftOf="@+id/saveRangeButton"
-
         android:inputType="textPersonName" />
 
     <TextView

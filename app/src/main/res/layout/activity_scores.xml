@@ -12,48 +12,94 @@ android:background="@android:color/darker_gray">
     android:id="@+id/title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="-1dp"
-    android:layout_marginTop="0dp"
-    android:text="כתוב שם"
+    android:text="כתוב מטווח"
+    android:layout_toLeftOf="@+id/showScoresButton"
     android:textAlignment="center"
     android:textColor="#FFFFFF"
-    android:textSize="35sp" />
+    android:textSize="25sp" />
 
 <Button
-    android:id="@+id/saveData"
+    android:id="@+id/saveRange"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
-    android:layout_marginTop="60dp"
+    android:layout_marginTop="5dp"
     android:layout_marginRight="24dp"
-    android:text="הוסף מטווח" />
+    android:layout_below="@+id/title"
+    android:text="בחר מטווח" />
+
+<Button
+    android:id="@+id/saveName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="24dp"
+    android:layout_below="@+id/saveRange"
+    android:text="שמור שם" />
+
+<Button
+    android:id="@+id/saveScore"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="24dp"
+    android:layout_below="@+id/saveName"
+    android:text=" בחר ציון" />
+
+
 
 <EditText
-    android:id="@+id/editData"
+    android:id="@+id/editName"
     android:layout_width="260dp"
     android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="6dp"
-    android:layout_marginTop="62dp"
-
-    android:layout_toLeftOf="@+id/saveData"
+    android:layout_marginRight="4dp"
+    android:layout_toLeftOf="@+id/saveName"
+    android:layout_below="@+id/editRange"
+    android:layout_alignBottom="@+id/saveName"
     android:inputType="textPersonName" />
 
-<TextView
-    android:id="@+id/scrollView"
-    android:layout_width="match_parent"
+<EditText
+    android:id="@+id/editRange"
+    android:layout_width="260dp"
     android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="7dp"
-    android:layout_marginTop="127dp"
-    android:scrollbars="vertical"
-    android:textAlignment="center"
-    android:textColor="#FFFFFF"
-    android:textSize="35sp" />
+    android:layout_toLeftOf="@+id/saveRange"
+    android:layout_marginRight="4dp"
+    android:layout_below="@+id/title"
+    android:layout_alignBottom="@+id/saveRange"
+    android:inputType="textPersonName" />
+
+<EditText
+    android:id="@+id/editScore"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="4dp"
+    android:layout_below="@+id/editName"
+    android:layout_toLeftOf="@+id/saveScore"
+    android:layout_alignBottom="@+id/saveScore"
+    android:inputType="number" />
+
+
+<TextView
+        android:id="@+id/scrollNamesView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editScore"
+        android:layout_marginTop="10dp"
+        android:scrollbars = "vertical"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp"/>
+
+
+
+<Button
+    android:id="@+id/showScoresButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:text="טבלת תוצאות" />
+
 
 
 </RelativeLayout>
