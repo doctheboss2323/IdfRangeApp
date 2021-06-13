@@ -111,9 +111,9 @@ public class scoresActivity extends AppCompatActivity {
 
                 else
                 {
-                    title.append("תוצאה נשמרה בהצלחה");
                     addScore(matrix,newName,newRange,newScore);
                     editScore.setText("");
+                    //title.append("תוצאה נשמרה בהצלחה");
                     newScore="999"; //to recognize a blank
                 }
                 }
@@ -170,7 +170,7 @@ public class scoresActivity extends AppCompatActivity {
     public String[][] addScore(String [][] matrix, String name, String range, String score){
         scrollNamesView.setText("");
         scrollNamesView.append(name+"\n"+range+"\n"+score);
-        int namePosition=1,rangePosition=1;
+        int namePosition=38,rangePosition=8;
 
         for (int i = 1; i < matrix.length-1; i++) {
             try{
