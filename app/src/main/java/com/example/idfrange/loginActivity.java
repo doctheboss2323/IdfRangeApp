@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import static android.content.ContentValues.TAG;
 
 public class loginActivity extends AppCompatActivity {
-    EditText emailEditText, passwordEditText;
+    EditText emailEditText, passwordEditText,nameEditText;
     Button loginButton;
     FirebaseAuth mAuth;
 
@@ -34,6 +34,7 @@ public class loginActivity extends AppCompatActivity {
         emailEditText=findViewById(R.id.email_edittext);
         passwordEditText=findViewById(R.id.enterpass_edittext);
         loginButton=findViewById(R.id.register_button);
+        nameEditText=findViewById(R.id.fullname_edittext);
 
         mAuth = FirebaseAuth.getInstance();
         //FirebaseAuth.getInstance().signOut();
@@ -80,7 +81,7 @@ public class loginActivity extends AppCompatActivity {
 
     public void updateUI(FirebaseUser currentUser) {
         Intent profileIntent=new Intent(this,MainActivity.class);
-        profileIntent.putExtra("email", currentUser.getEmail());
+        profileIntent.putExtra("name", nameEditText.getText().toString());
         startActivity(profileIntent);
     }
 }

@@ -12,9 +12,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     Button saveButton,startRangeButton;
     EditText nameInput;
-    TextView tv;
+    TextView tv,clientNameTextView;
     String[] names;
-    String newNameString;
+    String newNameString,clientName;
     int namesCounter;
 
     @Override
@@ -29,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         nameInput=findViewById(R.id.nameEditText);
         saveButton= findViewById(R.id.saveNameButton);
         startRangeButton=findViewById(R.id.startRangeButton);
+        clientNameTextView=findViewById(R.id.clientNameTextView);
+
+        Intent intent = getIntent();
+        clientName=intent.getStringExtra("name");
+
+        clientNameTextView.setText("clientName");
 
         //ArrayList <String> names= new ArrayList<String>();
         names=new String[40];
