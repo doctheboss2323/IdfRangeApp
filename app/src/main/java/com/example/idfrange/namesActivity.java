@@ -8,14 +8,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+
+public class namesActivity extends AppCompatActivity {
     Button saveButton,startRangeButton;
     EditText nameInput;
     TextView tv,clientNameTextView;
     String[] names;
-    String newNameString,clientName;
+    String newNameString,clientName,rangeId;
     int namesCounter;
+
+    DatabaseReference myDatabase;
+//    DatabaseReference myRef;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +41,19 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         clientName=intent.getStringExtra("name");
-
-        clientNameTextView.setText("clientName");
+        rangeId=intent.getStringExtra("rangeId");
+        clientNameTextView.setText(clientName);
 
         //ArrayList <String> names= new ArrayList<String>();
         names=new String[40];
-
         namesCounter=0;
+
+//        myDatabase= FirebaseDatabase.getInstance().getReference();
+//        myDatabase.child("names").setValue("noder");
+        // Write a message to the database
+
+
+
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         startRangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,rangesActivity.class);
+                Intent intent =new Intent(namesActivity.this,rangesActivity.class);
                 intent.putExtra("nameCount",namesCounter);
                 intent.putExtra("nameList",names);
                 startActivity(intent);
@@ -66,15 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        startRangeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                tv.setText("\n");
-//                for(int i=0;i<names.size();i++){
-//                    tv.append(names.get(i)+"\n");
-//                }
-//            }
-//        });
 
     }
 }

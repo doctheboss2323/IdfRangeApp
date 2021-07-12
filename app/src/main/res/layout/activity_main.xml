@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context=".MainActivity"
+    tools:context=".namesActivity"
     android:background="@android:color/darker_gray">
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:text="Client name"
+        android:text="Client name updated"
         android:textColor="#FFFFFF"
         android:textSize="20sp"/>
 

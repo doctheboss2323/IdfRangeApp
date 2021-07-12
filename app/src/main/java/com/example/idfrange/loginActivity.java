@@ -17,13 +17,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static android.content.ContentValues.TAG;
 
 public class loginActivity extends AppCompatActivity {
-    EditText emailEditText, passwordEditText,nameEditText;
-    Button loginButton;
+    EditText emailEditText, passwordEditText,nameEditText,rangeEditText;
+    Button loginButton,newRangeButton;
     FirebaseAuth mAuth;
+    String email,password,id,range;
+    FirebaseDatabase firstDatabase= FirebaseDatabase.getInstance("https://idfrange-default-rtdb.europe-west1.firebasedatabase.app/");
+    DatabaseReference nameDb=firstDatabase.getReference();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +42,42 @@ public class loginActivity extends AppCompatActivity {
         //Initial work
         emailEditText=findViewById(R.id.email_edittext);
         passwordEditText=findViewById(R.id.enterpass_edittext);
-        loginButton=findViewById(R.id.register_button);
         nameEditText=findViewById(R.id.fullname_edittext);
+        rangeEditText=findViewById(R.id.range_edittext);
+        loginButton=findViewById(R.id.register_button);
+        newRangeButton=findViewById(R.id.newrange_button);
 
         mAuth = FirebaseAuth.getInstance();
-        //FirebaseAuth.getInstance().signOut();
+        //FirebaseAuth.getInstance().signOut();  ///////// TO KEEP
 
-            loginButton.setOnClickListener(new View.OnClickListener() {
+
+        // Read from the database
+//        namesDb.child("names").child("elie").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                loginButton.setText(value);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                loginButton.setText("Failed");
+//            }
+//        });
+
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email=emailEditText.getText().toString();
-                String password=passwordEditText.getText().toString();
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+
+                email=emailEditText.getText().toString();
+                password=passwordEditText.getText().toString();
+                id=nameEditText.getText().toString();
+                range=rangeEditText.getText().toString();
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) {
                     Toast.makeText(getApplicationContext(), "Enter email and password",
                             Toast.LENGTH_LONG).show();
                     return;
@@ -63,25 +96,68 @@ public class loginActivity extends AppCompatActivity {
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                                     Toast.makeText(loginActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
+                                 }
+                        }
+                    });
+        }
+        });
+
+
+        newRangeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email=emailEditText.getText().toString();
+                String password=passwordEditText.getText().toString();
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ) {
+                    Toast.makeText(getApplicationContext(), "Enter email and password",
+                            Toast.LENGTH_LONG).show();
+
+                    return;
+                }
+                mAuth.signInWithEmailAndPassword(email,password)
+                        .addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    Toast.makeText(loginActivity.this, "Authentication sucessfull.",
+                                            Toast.LENGTH_SHORT).show();
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUInew(user);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(loginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
+
             }
         });
+
     }
 
     @Override
     public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser!=null){
-            updateUI(currentUser);}
+        super.onStart();           ///////// TO PUT BACK
+         //Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = mAuth.getCurrentUser()
+//        if(currentUser!=null){
+//            updateUI(currentUser);}
     }
 
     public void updateUI(FirebaseUser currentUser) {
-        Intent profileIntent=new Intent(this,MainActivity.class);
-        profileIntent.putExtra("name", nameEditText.getText().toString());
+        Intent profileIntent=new Intent(this,namesActivity.class);
+        profileIntent.putExtra("id", nameEditText.getText().toString());
+        profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
+        startActivity(profileIntent);
+    }
+
+    public void updateUInew(FirebaseUser currentUser) {
+        Intent profileIntent=new Intent(this,newRangeActivity.class);
+        profileIntent.putExtra("id", nameEditText.getText().toString());
         startActivity(profileIntent);
     }
 }
