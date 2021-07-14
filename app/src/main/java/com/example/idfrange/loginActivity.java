@@ -24,7 +24,7 @@ import static android.content.ContentValues.TAG;
 
 public class loginActivity extends AppCompatActivity {
     EditText emailEditText, passwordEditText,nameEditText,rangeEditText;
-    Button loginButton,newRangeButton;
+    Button joinRangeButton,newRangeButton;
     FirebaseAuth mAuth;
     String email,password,id,range;
     FirebaseDatabase firstDatabase= FirebaseDatabase.getInstance("https://idfrange-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -41,14 +41,14 @@ public class loginActivity extends AppCompatActivity {
         passwordEditText=findViewById(R.id.enterpass_edittext);
         nameEditText=findViewById(R.id.fullname_edittext);
         rangeEditText=findViewById(R.id.range_edittext);
-        loginButton=findViewById(R.id.register_button);
+        joinRangeButton=findViewById(R.id.register_button);
         newRangeButton=findViewById(R.id.newrange_button);
 
         mAuth = FirebaseAuth.getInstance();
         //FirebaseAuth.getInstance().signOut();  ///////// TO KEEP
 
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        joinRangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -56,29 +56,34 @@ public class loginActivity extends AppCompatActivity {
                 password=passwordEditText.getText().toString();
                 id=nameEditText.getText().toString();
                 range=rangeEditText.getText().toString();
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) {
-                    Toast.makeText(getApplicationContext(), "Enter email password name and range to join",
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(getApplicationContext(), "Name and range Id",
                             Toast.LENGTH_LONG).show();
                     return;
                 }
-                mAuth.signInWithEmailAndPassword(email,password)
-                        .addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUI(user);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(loginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                 }
-                        }
-                    });
-        }
+                else{
+                    Intent profileIntent=new Intent(loginActivity.this, scoreActivity.class);
+                    profileIntent.putExtra("clientName", nameEditText.getText().toString());
+                    profileIntent.putExtra("rangeId", rangeEditText.getText().toString());}
+            }
+//                mAuth.signInWithEmailAndPassword(email,password)
+//                        .addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<AuthResult> task) {
+//                                if (task.isSuccessful()) {
+//                                    // Sign in success, update UI with the signed-in user's information
+//                                    Log.d(TAG, "signInWithEmail:success");
+//                                    FirebaseUser user = mAuth.getCurrentUser();
+//                                    updateUI(user);
+//                                } else {
+//                                    // If sign in fails, display a message to the user.
+//                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+//                                    Toast.makeText(loginActivity.this, "Authentication failed.",
+//                                            Toast.LENGTH_SHORT).show();
+//                                 }
+//                        }
+//                    });
+
         });
 
 
@@ -87,8 +92,8 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email=emailEditText.getText().toString();
                 String password=passwordEditText.getText().toString();
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ) {
-                    Toast.makeText(getApplicationContext(), "Enter email and password",
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)  || TextUtils.isEmpty(id) || TextUtils.isEmpty(range) ) {
+                    Toast.makeText(getApplicationContext(), "Enter email password name and range to join",
                             Toast.LENGTH_LONG).show();
 
                     return;
@@ -127,12 +132,12 @@ public class loginActivity extends AppCompatActivity {
 //            updateUI(currentUser);}
     }
 
-    public void updateUI(FirebaseUser currentUser) {
-        Intent profileIntent=new Intent(this, scoreActivity.class);
-        profileIntent.putExtra("clientName", nameEditText.getText().toString());
-        profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
-        startActivity(profileIntent);
-    }
+//    public void updateUI(FirebaseUser currentUser) {
+//        Intent profileIntent=new Intent(this, scoreActivity.class);
+//        profileIntent.putExtra("clientName", nameEditText.getText().toString());
+//        profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
+//        startActivity(profileIntent);
+//    }
 
     public void updateUInew(FirebaseUser currentUser) {
         Intent profileIntent=new Intent(this,newRangeActivity.class);
