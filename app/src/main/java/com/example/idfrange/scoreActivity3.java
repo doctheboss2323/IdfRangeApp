@@ -82,16 +82,16 @@ public class scoreActivity3 extends AppCompatActivity {
 
 
 
-//        saveScoreButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String chosenDrill=spinner.getSelectedItem().toString();
-//                saveScoreButton.setText(chosenDrill);
-//                //rangeIdDb.child(rangeId).child(chosenDrill).child(clientId).setValue(editScore.getText().toString());
-//                Toast.makeText(scoreActivity3.this, "Score saved", Toast.LENGTH_SHORT).show();
-//            }
-//
-//        });
+        saveScoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String chosenDrill=spinner.getSelectedItem().toString();
+                saveScoreButton.setText(chosenDrill);
+                rangeIdDb.child(rangeId).child(chosenDrill).child(clientId).setValue(editScore.getText().toString());
+                Toast.makeText(scoreActivity3.this, "Score saved", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
 
 
