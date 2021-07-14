@@ -20,13 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class scoreActivity extends AppCompatActivity {
-    ///// import variables and complete db data ranges
-//    TextView title,scrollNamesView;
-//    Button saveName,saveRange,saveScore,showScores;
-    //EditText editName,editRange,editScore;
-//    String[][] matrix;
-//    String newRange, newName, newScore;//    int i;
-
 
     Button saveScoreButton;
     EditText editScore;
