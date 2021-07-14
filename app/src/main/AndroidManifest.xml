@@ -12,11 +12,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".scoreActivity"></activity>
-        <activity android:name=".scoreActivityNew" />
         <activity android:name=".newRangeActivity" />
-        <activity android:name=".namesActivity" />
         <activity android:name=".tableActivity" />
-        <activity android:name=".previousScoreActivity" />
         <activity android:name=".rangesActivity" />
         <activity android:name=".loginActivity">
             <intent-filter>

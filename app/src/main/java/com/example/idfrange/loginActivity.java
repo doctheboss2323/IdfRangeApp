@@ -52,19 +52,20 @@ public class loginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                email=emailEditText.getText().toString();
-                password=passwordEditText.getText().toString();
+//                email=emailEditText.getText().toString();
+//                password=passwordEditText.getText().toString();
                 id=nameEditText.getText().toString();
                 range=rangeEditText.getText().toString();
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Name and range Id",
+                if(TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) {
+                    Toast.makeText(getApplicationContext(), "enter name and range Id",
                             Toast.LENGTH_LONG).show();
-                    return;
                 }
                 else{
                     Intent profileIntent=new Intent(loginActivity.this, scoreActivity.class);
                     profileIntent.putExtra("clientName", nameEditText.getText().toString());
-                    profileIntent.putExtra("rangeId", rangeEditText.getText().toString());}
+                    profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
+                    startActivity(profileIntent);
+                }
             }
 //                mAuth.signInWithEmailAndPassword(email,password)
 //                        .addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
