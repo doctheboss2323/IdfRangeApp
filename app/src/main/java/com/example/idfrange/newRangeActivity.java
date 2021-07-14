@@ -31,7 +31,7 @@ public class newRangeActivity extends AppCompatActivity {
         continueButton=findViewById(R.id.registerrange_button);
 
         Intent intent=getIntent();
-        creatorName=intent.getStringExtra("id");
+        creatorName=intent.getStringExtra("clientName");
 
 
         continueButton.setOnClickListener(new View.OnClickListener() {
@@ -44,8 +44,9 @@ public class newRangeActivity extends AppCompatActivity {
                 else{
                     rangeIdDb.child(newrangeEditText.getText().toString()).setValue(creatorName);
 
-                    Intent profileIntent=new Intent(newRangeActivity.this, namesActivity.class); // TO CHANGE
+                    Intent profileIntent=new Intent(newRangeActivity.this, rangesActivity.class); // TO CHANGE
                     profileIntent.putExtra("rangeId",newrangeEditText.getText().toString());
+                    profileIntent.putExtra("clientName",creatorName);
                     startActivity(profileIntent);
 
                 }

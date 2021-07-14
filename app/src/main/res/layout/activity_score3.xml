@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundblack"
-    tools:context=".previousScoreActivity">
+    tools:context=".scoreActivity3">
 
 
 
-<Spinner
+    <Spinner
         android:id="@+id/ranges_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +25,7 @@
         android:layout_marginTop="250dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:text="95"
+        android:text="69"
         android:hint="Drill score"
         android:inputType="phone"
         android:layout_centerHorizontal="true"  />

@@ -1,62 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     tools:context=".rangesActivity"
-    android:background="@android:color/darker_gray">
+    android:background="@drawable/backgroundblue"
+    tools:ignore="UseSwitchCompatOrMaterialXml">
 
-    <TextView
-        android:id="@+id/rangeTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
-        android:text="הכנס מטווחים"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="35sp"/>
-
-    <Button
-        android:id="@+id/saveRangeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:layout_alignParentRight="true"
-        android:text="הוסף מטווח"/>
 
     <EditText
-        android:id="@+id/rangeEditText"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="137dp"
-        android:layout_toLeftOf="@+id/saveRangeButton"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/scrollRangesView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:id="@+id/newdrill_edittext"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="180dp"
-        android:scrollbars = "vertical"
-        android:textAlignment="center"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Enter new drill"
+        android:inputType="textEmailAddress"
+        android:text="25m"
         android:textColor="#FFFFFF"
-        android:textSize="35sp"/>
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
-        android:id="@+id/startRangeButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentRight="true"
-        android:text=" !!! אש במטווח" />
+        android:id="@+id/registerdrill_button"
+        android:layout_width="256dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_shape"
+        android:text="Open new drill"
+        android:textColor="@android:color/background_light"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newdrill_edittext" />
+
+    <Button
+        android:id="@+id/continuescores_button"
+        android:layout_width="256dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_shape"
+        android:text="Continue to scores"
+        android:textColor="@android:color/background_light"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerdrill_button" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
