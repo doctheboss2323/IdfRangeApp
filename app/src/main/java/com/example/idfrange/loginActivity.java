@@ -87,7 +87,7 @@ public class loginActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-//                                    updateUI(user);
+                                    updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -145,12 +145,12 @@ public class loginActivity extends AppCompatActivity {
 //            updateUI(currentUser);}
     }
 
-//    public void updateUI(FirebaseUser currentUser) {
-//        Intent profileIntent=new Intent(this, scoreActivityNew.class);
-//        profileIntent.putExtra("clientName", nameEditText.getText().toString());
-//        profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
-//        startActivity(profileIntent);
-//    }
+    public void updateUI(FirebaseUser currentUser) {
+        Intent profileIntent=new Intent(this, scoreActivity.class);
+        profileIntent.putExtra("clientName", nameEditText.getText().toString());
+        profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
+        startActivity(profileIntent);
+    }
 
     public void updateUInew(FirebaseUser currentUser) {
         Intent profileIntent=new Intent(this,newRangeActivity.class);

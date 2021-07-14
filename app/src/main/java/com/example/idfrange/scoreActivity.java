@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class scoreActivity3 extends AppCompatActivity {
+public class scoreActivity extends AppCompatActivity {
     ///// import variables and complete db data ranges
 //    TextView title,scrollNamesView;
 //    Button saveName,saveRange,saveScore,showScores;
@@ -57,42 +55,40 @@ public class scoreActivity3 extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-
-//        final List<String> rangesList = Arrays.asList("AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY");
-
-        rangeIdDb.child(rangeId).addListenerForSingleValueEvent(new ValueEventListener() {
+        rangeIdDb.child(rangeId).child("drillList").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
-                    String value = ds.getValue(String.class);
-                    rangesList.add(value);
+                    try {
+                        String value = ds.getValue(String.class);
+                        rangesList.add(value);
+                    }
+                    catch(Exception e){}
                 }
-                Toast.makeText(scoreActivity3.this, "drills added", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(scoreActivity.this, "drills added", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Toast.makeText(scoreActivity3.this, "Add new drill failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(scoreActivity.this, "Add new drill failed", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
 
 
 
         saveScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String chosenDrill=spinner.getSelectedItem().toString();
-                saveScoreButton.setText(chosenDrill);
-                rangeIdDb.child(rangeId).child(chosenDrill).child(clientId).setValue(editScore.getText().toString());
-                Toast.makeText(scoreActivity3.this, "Score saved", Toast.LENGTH_SHORT).show();
+                String chosenDrill = spinner.getSelectedItem().toString();
+                if (!chosenDrill.equals("") && !editScore.getText().toString().equals("000")) {
+                    //"if' is used because of bug when first node of array is not added
+
+                    rangeIdDb.child(rangeId).child(chosenDrill).child(clientId).setValue(editScore.getText().toString());
+                    editScore.setText("000");
+                    Toast.makeText(scoreActivity.this, "Score saved", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(scoreActivity.this, "choose a drill and enter a score", Toast.LENGTH_SHORT).show();
+                }
             }
-
         });
-
-
-
     }}

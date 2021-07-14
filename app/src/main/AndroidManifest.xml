@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".scoreActivity3"></activity>
+        <activity android:name=".scoreActivity"></activity>
         <activity android:name=".scoreActivityNew" />
         <activity android:name=".newRangeActivity" />
         <activity android:name=".namesActivity" />
