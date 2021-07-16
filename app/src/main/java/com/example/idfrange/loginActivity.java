@@ -2,14 +2,22 @@ package com.example.idfrange;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +32,8 @@ import static android.content.ContentValues.TAG;
 
 public class loginActivity extends AppCompatActivity {
     EditText emailEditText, passwordEditText,nameEditText,rangeEditText;
-    Button joinRangeButton,newRangeButton;
+    Button joinRangeButton,newRangeButton,firstTimeButton,firstTimeButton2;
+    ImageView img;
     FirebaseAuth mAuth;
     String email,password,id,range;
     FirebaseDatabase firstDatabase= FirebaseDatabase.getInstance("https://idfrange-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -37,16 +46,28 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //Initial work
-        emailEditText=findViewById(R.id.email_edittext);
-        passwordEditText=findViewById(R.id.enterpass_edittext);
-        nameEditText=findViewById(R.id.fullname_edittext);
-        rangeEditText=findViewById(R.id.range_edittext);
-        joinRangeButton=findViewById(R.id.register_button);
-        newRangeButton=findViewById(R.id.newrange_button);
-
+        emailEditText = findViewById(R.id.email_edittext);
+        passwordEditText = findViewById(R.id.enterpass_edittext);
+        nameEditText = findViewById(R.id.fullname_edittext);
+        rangeEditText = findViewById(R.id.range_edittext);
+        joinRangeButton = findViewById(R.id.register_button);
+        newRangeButton = findViewById(R.id.newrange_button);
+        firstTimeButton = findViewById(R.id.firstTime_button);
+        firstTimeButton2 = findViewById(R.id.firstTime2_button);
+        img=findViewById(R.id.imageView);
+        firstTimeButton2.setVisibility (View.INVISIBLE);
         mAuth = FirebaseAuth.getInstance();
         //FirebaseAuth.getInstance().signOut();  ///////// TO KEEP
 
+
+        firstTimeButton.setOnClickListener(new View.OnClickListener() {
+            //@SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                firstTimeButton.setVisibility (View.INVISIBLE);
+                firstTimeButton2.setVisibility (View.VISIBLE);
+            }
+        });
 
         joinRangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,14 +75,13 @@ public class loginActivity extends AppCompatActivity {
 
 //                email=emailEditText.getText().toString();
 //                password=passwordEditText.getText().toString();
-                id=nameEditText.getText().toString();
-                range=rangeEditText.getText().toString();
-                if(TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) {
+                id = nameEditText.getText().toString();
+                range = rangeEditText.getText().toString();
+                if (TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) {
                     Toast.makeText(getApplicationContext(), "enter name and range Id",
                             Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Intent profileIntent=new Intent(loginActivity.this, scoreActivity.class);
+                } else {
+                    Intent profileIntent = new Intent(loginActivity.this, scoreActivity.class);
                     profileIntent.putExtra("clientName", nameEditText.getText().toString());
                     profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
                     startActivity(profileIntent);
@@ -88,18 +108,28 @@ public class loginActivity extends AppCompatActivity {
         });
 
 
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rotateImg();
+            }
+        });
+
+
         newRangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email=emailEditText.getText().toString();
-                String password=passwordEditText.getText().toString();
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)  || TextUtils.isEmpty(id) || TextUtils.isEmpty(range) ) {
-                    Toast.makeText(getApplicationContext(), "Enter email password name and range to join",
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                String id = nameEditText.getText().toString();
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(id)) {
+                    Toast.makeText(getApplicationContext(), "Enter email password and name to join",
                             Toast.LENGTH_LONG).show();
 
                     return;
                 }
-                mAuth.signInWithEmailAndPassword(email,password)
+                rotateImg();
+                mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -118,10 +148,8 @@ public class loginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
             }
         });
-
     }
 
     @Override
@@ -144,5 +172,17 @@ public class loginActivity extends AppCompatActivity {
         Intent profileIntent=new Intent(this,newRangeActivity.class);
         profileIntent.putExtra("clientName", nameEditText.getText().toString());
         startActivity(profileIntent);
+    }
+
+    public void rotateImg(){
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 360f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+        rotateAnimation.setDuration(500);
+        rotateAnimation.setRepeatCount(Animation.INFINITE);
+        findViewById(R.id.imageView).startAnimation(rotateAnimation);
+
     }
 }

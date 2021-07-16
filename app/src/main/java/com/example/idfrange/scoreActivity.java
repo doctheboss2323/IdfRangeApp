@@ -73,11 +73,10 @@ public class scoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String chosenDrill = spinner.getSelectedItem().toString();
-                if (!chosenDrill.equals("") && !editScore.getText().toString().equals("000")) {
+                if (!chosenDrill.equals("") && !editScore.getText().toString().equals("")) {
                     //"if' is used because of bug when first node of array is not added
 
                     rangeIdDb.child(rangeId).child(chosenDrill).child(clientId).setValue(editScore.getText().toString());
-                    editScore.setText("000");
                     Toast.makeText(scoreActivity.this, "Score saved", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(scoreActivity.this, "choose a drill and enter a score", Toast.LENGTH_SHORT).show();
