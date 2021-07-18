@@ -39,7 +39,7 @@ public class loginActivity extends AppCompatActivity {
     FirebaseDatabase firstDatabase= FirebaseDatabase.getInstance("https://idfrange-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference nameDb=firstDatabase.getReference();
 
-
+   ////////// ADD function to check if join range exist
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
