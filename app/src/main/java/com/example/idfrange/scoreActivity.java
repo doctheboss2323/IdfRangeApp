@@ -27,11 +27,11 @@ import static android.content.ContentValues.TAG;
 
 public class scoreActivity extends AppCompatActivity {
 
-    Button saveScoreButton;
+    Button saveScoreButton,allScoresButton;
     TextView myScores;
     EditText editScore;
     Spinner spinner;
-    String rangeId,clientId,chosenDrill="not changed yet",score="0";
+    String rangeId,clientId,chosenDrill="not changed yet",score="";
     FirebaseDatabase firstDatabase= FirebaseDatabase.getInstance("https://idfrange-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference rangeIdDb=firstDatabase.getReference();
 
@@ -48,8 +48,7 @@ public class scoreActivity extends AppCompatActivity {
         editScore=findViewById(R.id.score_edittext);
         saveScoreButton=findViewById(R.id.savescore_button);
         myScores=findViewById(R.id.myscorestextview);
-//        rangeIdDb.child(rangeId).child("Name list").child(clientId).setValue("");
-
+        allScoresButton=findViewById(R.id.allscoresbutton);
         final ArrayList<String> rangesList=new ArrayList<String>();
         rangesList.add("");
 
@@ -76,14 +75,14 @@ public class scoreActivity extends AppCompatActivity {
             }
         });
 
-        //Printing clients own scores
-        rangeIdDb.child(rangeId).child("Name list").child(clientId).addValueEventListener(new ValueEventListener(){
+        rangeIdDb.child(rangeId).child("Name list").child(clientId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                myScores.setText("My scores:"+"\n");
+                myScores.setText("My scores: "+"\n");
+                myScores.append("\n");
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
-                    myScores.append("-");
                     try{
+                        myScores.append(score);
                         String drill = ds.getKey();
                         String score = ds.getValue(String.class);
                         myScores.append(drill+": "+score+"\n");
@@ -113,6 +112,15 @@ public class scoreActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(scoreActivity.this, "choose a drill and enter a score", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        allScoresButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(scoreActivity.this,tableActivity.class);
+                intent.putExtra("clientId",clientId);
+                intent.putExtra("rangeId",rangeId);
+                startActivity(intent);
             }
         });
     }}

@@ -23,7 +23,7 @@
 
     <EditText
         android:id="@+id/score_edittext"
-        android:textColor="#FFFFFF"
+        android:textColor="#FFFDFD"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -48,7 +48,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/button_shape_red"
         android:text="Save score"
         android:textColor="@android:color/background_light"
         android:textSize="16sp"
@@ -61,21 +61,35 @@
     <TextView
         android:id="@+id/myscorestextview"
         android:layout_width="256dp"
-        android:layout_height="42dp"
+        android:layout_height="250dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:gravity="center|center_vertical"
         android:text="You dont have any score yet."
-        android:textColor="#000000"
-        android:textSize="16sp"
+        android:textColor="#F8F8F8"
+        android:textSize="18sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/savescore_button" />
 
-
-
+    <Button
+        android:id="@+id/allscoresbutton"
+        android:layout_width="256dp"
+        android:layout_height="42dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:textColor="@android:color/background_light"
+        android:gravity="center|center_vertical"
+        android:text="All scores"
+        android:textSize="16sp"
+        android:background="@drawable/button_shape_red"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myscorestextview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
