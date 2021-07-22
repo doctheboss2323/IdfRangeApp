@@ -4,8 +4,12 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,17 +23,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class tableActivity extends AppCompatActivity {
 //    String[][] matrix;
 //    TextView matrixView;
 //    Button returnButton;
-    TableLayout table;
-    LinearLayout linLayout;
-    int rowNumber,columnNumber;
     String rangeId,clientId;
+    RecyclerView scoresTable;
+    TextView drillTextView1,drillTextView2,drillTextView3;
+    MyAdapter myAdapter;
+    ArrayList<User> list;
     FirebaseDatabase firstDatabase= FirebaseDatabase.getInstance("https://idfrange-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference nameDb=firstDatabase.getReference();
-
 
 
     @Override
@@ -40,28 +46,55 @@ public class tableActivity extends AppCompatActivity {
         //Initial work
         Intent intent=getIntent();
         rangeId=intent.getStringExtra("rangeId");
-        clientId=intent.getStringExtra("clientId");
+        scoresTable=findViewById(R.id.scorestable);
+        scoresTable.setHasFixedSize(true);
+        scoresTable.setLayoutManager(new LinearLayoutManager(this));
+        list=new ArrayList<>();
+        myAdapter=new MyAdapter(this,list);
+        scoresTable.setAdapter(myAdapter);
+        drillTextView1=findViewById(R.id.drill1textview);
+        drillTextView2=findViewById(R.id.drill2textview);
+        drillTextView3=findViewById(R.id.drill3textview);
 
-        LinearLayout mainLayout = findViewById(R.id.mainLayout);
-        TableLayout table=new TableLayout(this);
 
-        //rowNumber=idCounter(nameDb.child(rangeId).child("Name list"));
-        rowNumber=3;
-        //columnNumber=idCounter(nameDb.child(rangeId).child("Drill list"));
-        columnNumber=8;
-
-        for (int i=0; i < rowNumber; i++) {
-            TableRow row = new TableRow(tableActivity.this);
-            for (int j=0; j < columnNumber; j++) {
-//                int value = random.nextInt(100) + 1;
-                TextView tv = new TextView(tableActivity.this);
-//                tv.setText(String.valueOf(value));
-                row.addView(tv);
+        //make the drills names
+        nameDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() {
+            int count=0;
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    setDrillValue(count,ds.getValue(String.class));
+                    count++;
+                }
             }
-            table.addView(row);
-        } ////////// add actual names and scores and ranges
 
-        mainLayout.addView(table);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        nameDb.child(rangeId).child("Global list").addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    User user=ds.getValue(User.class);
+                    list.add(user);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+
+
+
+
+
+
+
 
 
 
@@ -95,6 +128,20 @@ public class tableActivity extends AppCompatActivity {
 //                    }
 //                });
  }
+    public void setDrillValue(int count,String drill){
+        if(count==0){
+            drillTextView1.setText(drill);
+        }
+        if(count==1){
+            drillTextView2.setText(drill);
+        }
+        if(count==2){
+            drillTextView3.setText(drill);
+        }
+    }
+
+
+
     private int idCounter(DatabaseReference ref) {
         final int[] counter = new int[0];
         ref.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -44,6 +44,7 @@ public class newRangeActivity extends AppCompatActivity {
                 else{
                     rangeIdDb.child(newrangeEditText.getText().toString()).child("Drill list").setValue("");
                     rangeIdDb.child(newrangeEditText.getText().toString()).child("Name list").setValue("");
+                    rangeIdDb.child(newrangeEditText.getText().toString()).child("Global list").setValue("");
 
 
                     Intent profileIntent=new Intent(newRangeActivity.this, rangesActivity.class); // TO CHANGE
