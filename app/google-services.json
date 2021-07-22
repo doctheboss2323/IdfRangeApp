@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "864992380303",
+    "project_id": "idfrange",
+    "storage_bucket": "idfrange.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864992380303:android:3222092300a8b0721ef7fa",
+        "android_client_info": {
+          "package_name": "com.example.idfrange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864992380303-p39p5gcj1k1l0ppk0ccpi1210og54017.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe02M_z8c8JedPcPV8MaglZuEL2WO2Dj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864992380303-p39p5gcj1k1l0ppk0ccpi1210og54017.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
