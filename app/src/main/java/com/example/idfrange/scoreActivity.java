@@ -165,5 +165,33 @@ public class scoreActivity extends AppCompatActivity {
             db.child("drill3").setValue(drill);
             db.child("score3").setValue(score);
         }
+        if(count==3){
+            db.child("drill4").setValue(drill);
+            db.child("score4").setValue(score);
+        }
+        if(count==4){
+            db.child("drill5").setValue(drill);
+            db.child("score5").setValue(score);
+        }
+        if(count==5){
+            db.child("drill6").setValue(drill);
+            db.child("score6").setValue(score);
+        }
+        if(count==6){
+            db.child("drill7").setValue(drill);
+            db.child("score7").setValue(score);
+        }
+        if(count==7){
+            db.child("drill8").setValue(drill);
+            db.child("score8").setValue(score);
+        }
+        if(count==8){
+            db.child("drill9").setValue(drill);
+            db.child("score9").setValue(score);
+        }
+        if(count==9){
+            db.child("drill10").setValue(drill);
+            db.child("score10").setValue(score);
+        }
     }
 }

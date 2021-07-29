@@ -55,7 +55,69 @@
             android:text="score"
             android:textSize="10dp"
             />
-
+        <TextView
+            android:layout_width="33dp"
+            android:id="@+id/score4textview"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="score"
+            android:textSize="10dp"
+            />
+        <TextView
+            android:layout_width="33dp"
+            android:id="@+id/score5textview"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="score"
+            android:textSize="10dp"
+            />
+        <TextView
+            android:layout_width="33dp"
+            android:id="@+id/score6textview"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="score"
+            android:textSize="10dp"
+            />
+        <TextView
+            android:layout_width="33dp"
+            android:id="@+id/score7textview"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="score"
+            android:textSize="10dp"
+            />
+        <TextView
+            android:layout_width="33dp"
+            android:id="@+id/score8textview"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="score"
+            android:textSize="10dp"
+            />
+        <TextView
+            android:layout_width="33dp"
+            android:id="@+id/score9textview"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="score"
+            android:textSize="10dp"
+            />
+        <TextView
+            android:layout_width="33dp"
+            android:id="@+id/score10textview"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="score"
+            android:textSize="10dp"
+            />
 
 
     </LinearLayout>

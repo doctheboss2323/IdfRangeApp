@@ -31,7 +31,7 @@ public class tableActivity extends AppCompatActivity {
 //    Button returnButton;
     String rangeId,clientId;
     RecyclerView scoresTable;
-    TextView drillTextView1,drillTextView2,drillTextView3;
+    TextView drillTextView1,drillTextView2,drillTextView3,drillTextView4,drillTextView5,drillTextView6,drillTextView7,drillTextView8,drillTextView9,drillTextView10;
     MyAdapter myAdapter;
     ArrayList<User> list;
     FirebaseDatabase firstDatabase= FirebaseDatabase.getInstance("https://idfrange-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -55,6 +55,14 @@ public class tableActivity extends AppCompatActivity {
         drillTextView1=findViewById(R.id.drill1textview);
         drillTextView2=findViewById(R.id.drill2textview);
         drillTextView3=findViewById(R.id.drill3textview);
+        drillTextView4=findViewById(R.id.drill4textview);
+        drillTextView5=findViewById(R.id.drill5textview);
+        drillTextView6=findViewById(R.id.drill6textview);
+        drillTextView7=findViewById(R.id.drill7textview);
+        drillTextView8=findViewById(R.id.drill8textview);
+        drillTextView9=findViewById(R.id.drill9textview);
+        drillTextView10=findViewById(R.id.drill10textview);
+
 
 
         //make the drills names
@@ -137,6 +145,27 @@ public class tableActivity extends AppCompatActivity {
         }
         if(count==2){
             drillTextView3.setText(drill);
+        }
+        if(count==3){
+            drillTextView4.setText(drill);
+        }
+        if(count==4){
+            drillTextView5.setText(drill);
+        }
+        if(count==5){
+            drillTextView6.setText(drill);
+        }
+        if(count==6){
+            drillTextView7.setText(drill);
+        }
+        if(count==7){
+            drillTextView8.setText(drill);
+        }
+        if(count==8){
+            drillTextView9.setText(drill);
+        }
+        if(count==9){
+            drillTextView10.setText(drill);
         }
     }
 
