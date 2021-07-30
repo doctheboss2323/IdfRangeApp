@@ -65,7 +65,7 @@ public class scoreActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
                     try {
-                        String value = ds.getValue(String.class);
+                        String value = ds.getKey();
                         rangesList.add(value);
                     }
                     catch(Exception e){}
@@ -120,7 +120,8 @@ public class scoreActivity extends AppCompatActivity {
 
                     editScore.setText("");
                     Toast.makeText(scoreActivity.this, "Score saved", Toast.LENGTH_SHORT).show();}
-                    Toast.makeText(scoreActivity.this, "enter score between 0 and 100", Toast.LENGTH_SHORT).show();
+                    else{
+                    Toast.makeText(scoreActivity.this, "enter score between 0 and 100", Toast.LENGTH_SHORT).show();}
                 } else {
                     Toast.makeText(scoreActivity.this, "choose a drill and enter a score", Toast.LENGTH_SHORT).show();
                 }

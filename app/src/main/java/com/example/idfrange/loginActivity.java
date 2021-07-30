@@ -6,7 +6,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.content.ContentValues.TAG;
 
@@ -84,17 +89,29 @@ public class loginActivity extends AppCompatActivity {
                 range = rangeEditText.getText().toString();
 
 
-                if (TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) {
+                if (TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) { //check if name and range are typed in
                     Toast.makeText(getApplicationContext(), "enter name and range Id",
                             Toast.LENGTH_LONG).show();}
-                else if(!rangeExist(range)){
-                        Toast.makeText(loginActivity.this, "Range does not exist", Toast.LENGTH_SHORT).show();
-                    }
-                 else {
-                    Intent profileIntent = new Intent(loginActivity.this, scoreActivity.class);
-                    profileIntent.putExtra("clientName", nameEditText.getText().toString());
-                    profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
-                    startActivity(profileIntent);
+
+                 else {  // check if chosen range actually exist
+                    nameDb.child("Range list").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            if(dataSnapshot.hasChild(range))
+                            {
+                                Intent profileIntent = new Intent(loginActivity.this, scoreActivity.class);
+                                profileIntent.putExtra("clientName", nameEditText.getText().toString());
+                                profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
+                                startActivity(profileIntent);
+                            }
+                            else{Toast.makeText(loginActivity.this, "Range does not exist", Toast.LENGTH_SHORT).show();
+                      }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                        }
+                    });
                 }
             }
 
@@ -169,21 +186,5 @@ public class loginActivity extends AppCompatActivity {
         rotateAnimation.setDuration(500);
         rotateAnimation.setRepeatCount(Animation.INFINITE);
         findViewById(R.id.imageView).startAnimation(rotateAnimation);
-    }
-    public boolean rangeExist(String range){
-        final boolean[] condition = {false};
-        nameDb.child("Range list").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String guess=dataSnapshot.child(range).getValue(String.class);
-                joinRangeButton.setText(guess);
-                if(dataSnapshot.hasChild(range))
-                {condition[0] =true;}
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        return condition[0];
     }
 }

@@ -65,13 +65,13 @@ public class tableActivity extends AppCompatActivity {
 
 
 
-        //make the drills names
+        //make the drills names on top drll row
         nameDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() {
             int count=0;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds:snapshot.getChildren()){
-                    setDrillValue(count,ds.getValue(String.class));
+                    setDrillValue(count,ds.getKey());
                     count++;
                 }
             }
@@ -171,20 +171,20 @@ public class tableActivity extends AppCompatActivity {
 
 
 
-    private int idCounter(DatabaseReference ref) {
-        final int[] counter = new int[0];
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                counter[0] = (int) snapshot.getChildrenCount();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-
-        });
-        int count=counter[0];
-        return count;
-    }
+//    private int idCounter(DatabaseReference ref) {
+//        final int[] counter = new int[0];
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                counter[0] = (int) snapshot.getChildrenCount();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//
+//        });
+//        int count=counter[0];
+//        return count;
+//    }
 }

@@ -47,7 +47,7 @@ public class newRangeActivity extends AppCompatActivity {
                     rangeIdDb.child(rnge).child("Global list").setValue("");
                     rangeIdDb.child("Range list").child(rnge).setValue(rnge);
 
-                    Intent profileIntent=new Intent(newRangeActivity.this, rangesActivity.class); // TO CHANGE
+                    Intent profileIntent=new Intent(newRangeActivity.this, drillsActivity.class); // TO CHANGE
                     profileIntent.putExtra("rangeId",rnge);
                     profileIntent.putExtra("clientName",creatorName);
                     startActivity(profileIntent);
