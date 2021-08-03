@@ -13,7 +13,7 @@
         <activity android:name=".scoreActivity"></activity>
         <activity android:name=".newRangeActivity" />
         <activity android:name=".tableActivity" />
-        <activity android:name=".rangesActivity" />
+        <activity android:name=".drillsActivity" />
         <activity android:name=".loginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

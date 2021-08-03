@@ -32,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         User user=list.get(position);
-        holder.name.setText(user.getName()+"\n");
+        holder.name.setText(user.getName());
         holder.score1.setText(user.getScore1());
         holder.score2.setText(user.getScore2());
         holder.score3.setText(user.getScore3());

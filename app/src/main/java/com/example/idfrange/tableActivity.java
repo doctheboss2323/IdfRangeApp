@@ -64,15 +64,16 @@ public class tableActivity extends AppCompatActivity {
         drillTextView10=findViewById(R.id.drill10textview);
 
 
-
         //make the drills names on top drll row
         nameDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() {
-            int count=0;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds:snapshot.getChildren()){
-                    setDrillValue(count,ds.getKey());
-                    count++;
+                    try{
+                        String stcount=ds.getValue(String.class);
+                        int count=Integer.parseInt(stcount);
+                        setDrillValue(count,ds.getKey());}
+                    catch(Exception e){}
                 }
             }
 
@@ -99,75 +100,41 @@ public class tableActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-//        matrixView=findViewById(R.id.matrixView);
-//        matrixView.setMovementMethod(new ScrollingMovementMethod());
-//        returnButton=findViewById(R.id.returnButton);
-//
-//        Bundle extras = getIntent().getExtras();           // getting previous view arrays.
-//        matrix = (String[][]) extras.getSerializable("matrix");
-//
-//        for(int i=0;i<matrix.length-1;i++){
-//            for(int j=0;j<matrix[i].length-1;j++){
-//                if(matrix[i][j]!=null){
-//                    matrixView.append("| "+matrix[i][j]+" |");}
-//                else{matrixView.append("|       |");}
-//            }
-//            matrixView.append("\n"+"------------------------------------------------------------------"+"\n");
-//        }
-//
-//        returnButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            finish();
-//
-////                Intent mIntent =new Intent(tableActivity.this,scoresActivity.class);
-////                Bundle mBundle = new Bundle();
-////                mBundle.putSerializable("matrix",matrix);
-////                mIntent.putExtras(mBundle);
-////                startActivity(mIntent);
-//                    }
-//                });
  }
     public void setDrillValue(int count,String drill){
-        if(count==0){
+        if(count==1){
             drillTextView1.setText(drill);
         }
-        if(count==1){
+        if(count==2){
             drillTextView2.setText(drill);
         }
-        if(count==2){
+        if(count==3){
             drillTextView3.setText(drill);
         }
-        if(count==3){
+        if(count==4){
             drillTextView4.setText(drill);
         }
-        if(count==4){
+        if(count==5){
             drillTextView5.setText(drill);
         }
-        if(count==5){
+        if(count==6){
             drillTextView6.setText(drill);
         }
-        if(count==6){
+        if(count==7){
             drillTextView7.setText(drill);
         }
-        if(count==7){
+        if(count==8){
             drillTextView8.setText(drill);
         }
-        if(count==8){
+        if(count==9){
             drillTextView9.setText(drill);
         }
-        if(count==9){
+        if(count==10){
             drillTextView10.setText(drill);
         }
     }
+
+
 
 
 

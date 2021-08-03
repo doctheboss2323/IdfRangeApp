@@ -97,7 +97,6 @@ public class loginActivity extends AppCompatActivity {
                     nameDb.child("Range list").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
                             if(dataSnapshot.hasChild(range))
                             {
                                 Intent profileIntent = new Intent(loginActivity.this, scoreActivity.class);

@@ -54,7 +54,6 @@ public class scoreActivity extends AppCompatActivity {
         allScoresButton=findViewById(R.id.allscoresbutton);
         final ArrayList<String> rangesList=new ArrayList<String>();
         rangesList.add("");
-        scoreCount=refChild(rangeIdDb.child(rangeId).child("Name list").child(clientId));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,  R.layout.support_simple_spinner_dropdown_item, rangesList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,10 +93,8 @@ public class scoreActivity extends AppCompatActivity {
                     catch(Exception e){}
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
-                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
 
@@ -107,25 +104,30 @@ public class scoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String chosenDrill = spinner.getSelectedItem().toString();
-                String score=editScore.getText().toString();
-                if (!chosenDrill.equals("") && !score.equals("")) {
-                    //"if' is used because of bug when first node of array is not added
-                    if(Integer.parseInt(score)<101){
-
-                    rangeIdDb.child(rangeId).child(chosenDrill).child(clientId).setValue(score);
-                    rangeIdDb.child(rangeId).child("Name list").child(clientId).child(chosenDrill).setValue(score);
-
-                    globalScore(rangeIdDb.child(rangeId).child("Global list").child(clientId),scoreCount,clientId,score,chosenDrill);
-                    scoreCount++;
-
-                    editScore.setText("");
-                    Toast.makeText(scoreActivity.this, "Score saved", Toast.LENGTH_SHORT).show();}
-                    else{
-                    Toast.makeText(scoreActivity.this, "enter score between 0 and 100", Toast.LENGTH_SHORT).show();}
-                } else {
+                String score = editScore.getText().toString();
+                if (chosenDrill.equals("") || score.equals("")) {
                     Toast.makeText(scoreActivity.this, "choose a drill and enter a score", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                //"if' is used because of bug when first node of array is not added
+                if (Integer.parseInt(score) > 101) {
+                    Toast.makeText(scoreActivity.this, "enter score between 0 and 100", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+
+                rangeIdDb.child(rangeId).child(chosenDrill).child(clientId).setValue(score);
+                rangeIdDb.child(rangeId).child("Name list").child(clientId).child(chosenDrill).setValue(score);
+
+                refChild(rangeIdDb.child(rangeId), chosenDrill,clientId, score, chosenDrill);
+//                scoreCount=refChild(rangeIdDb.child(rangeId).child("Drill list"), chosenDrill );
+//                globalScore(rangeIdDb.child(rangeId).child("Global list").child(clientId), scoreCount, clientId, score, chosenDrill);
+
+                editScore.setText("");
+                Toast.makeText(scoreActivity.this, "Score saved", Toast.LENGTH_SHORT).show();}
             }
+
+
         });
         allScoresButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,60 +139,67 @@ public class scoreActivity extends AppCompatActivity {
             }
         });
     }
-    public int refChild(DatabaseReference db){
+    public void refChild(DatabaseReference db,String range,String clientId,String score,String chosenDrill){
         final int[] count = {0};
-        db.addListenerForSingleValueEvent(new ValueEventListener() {
+        db.child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot ds) {
-                if(ds.hasChildren()){
-                    count[0] = (int) ds.getChildrenCount();}
+                for(DataSnapshot data:ds.getChildren()){
+                    if(data.getKey().equals(range)){
+                        Toast.makeText(scoreActivity.this, data.getKey(), Toast.LENGTH_SHORT).show();
+                        String scount=data.getValue(String.class);
+                        count[0]=Integer.valueOf(scount);
+                        globalScore(db.child("Global list").child(clientId), count[0], clientId, score, chosenDrill,clientId);
+                    }
+                }
             }
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
             }
         });
-        return count[0];
+//        return count[0];
     }
-    public void globalScore(DatabaseReference db,int count,String clientId,String score,String drill){
-        if(count==0){
-            db.child("name").setValue(clientId);
+
+    public void globalScore(DatabaseReference db,int count,String clientId,String score,String drill,String client){
+        db.child("name").setValue(client);
+        if(count==1){
             db.child("drill1").setValue(drill);
             db.child("score1").setValue(score);
         }
-        if(count==1){
+        if(count==2){
             db.child("drill2").setValue(drill);
             db.child("score2").setValue(score);
         }
-        if(count==2){
+        if(count==3){
             db.child("drill3").setValue(drill);
             db.child("score3").setValue(score);
         }
-        if(count==3){
+        if(count==4){
             db.child("drill4").setValue(drill);
             db.child("score4").setValue(score);
         }
-        if(count==4){
+        if(count==5){
             db.child("drill5").setValue(drill);
             db.child("score5").setValue(score);
         }
-        if(count==5){
+        if(count==6){
             db.child("drill6").setValue(drill);
             db.child("score6").setValue(score);
         }
-        if(count==6){
+        if(count==7){
             db.child("drill7").setValue(drill);
             db.child("score7").setValue(score);
         }
-        if(count==7){
+        if(count==8){
             db.child("drill8").setValue(drill);
             db.child("score8").setValue(score);
         }
-        if(count==8){
+        if(count==9){
             db.child("drill9").setValue(drill);
             db.child("score9").setValue(score);
         }
-        if(count==9){
+        if(count==10){
             db.child("drill10").setValue(drill);
             db.child("score10").setValue(score);
         }
