@@ -64,7 +64,6 @@ public class tableActivity extends AppCompatActivity {
         drillTextView10=findViewById(R.id.drill10textview);
 
 
-        //make the drills names on top drll row
         nameDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -7,18 +7,29 @@
     tools:context=".newRangeActivity"
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
+    <TextView
+        android:id="@+id/drill0textview"
+        android:layout_marginStart="0dp"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill1textview"
-        android:layout_marginStart="61dp"
+        android:layout_marginStart="60dp"
         android:layout_width="33dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:gravity="center_horizontal"
         android:text="Drill"
         android:textSize="10dp"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill2textview"
@@ -29,7 +40,8 @@
         android:gravity="center_horizontal"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill3textview"
@@ -40,7 +52,8 @@
         android:text="Drill"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill4textview"
@@ -51,7 +64,8 @@
         android:text="Drill"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
     <TextView
         android:id="@+id/drill5textview"
         app:layout_constraintStart_toEndOf="@+id/drill4textview"
@@ -61,7 +75,8 @@
         android:text="Drill"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill6textview"
@@ -72,7 +87,8 @@
         android:text="Drill"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill7textview"
@@ -83,7 +99,8 @@
         android:text="Drill"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill8textview"
@@ -94,7 +111,8 @@
         android:text="Drill"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill9textview"
@@ -105,7 +123,8 @@
         android:text="Drill"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <TextView
         android:id="@+id/drill10textview"
@@ -116,7 +135,8 @@
         android:text="Drill"
         android:textColor="@android:color/black"
         android:textSize="10dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:textColor="#FFFFFF"
@@ -129,5 +149,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/back"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

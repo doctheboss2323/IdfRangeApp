@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +51,7 @@ public class loginActivity extends AppCompatActivity {
     DatabaseReference nameDb=firstDatabase.getReference();
 
    ////////// ADD function to check if join range exist
+    //// add function to keep personal data
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +70,11 @@ public class loginActivity extends AppCompatActivity {
         firstTimeButton2.setVisibility (View.INVISIBLE);
         mAuth = FirebaseAuth.getInstance();
         range="";
+        id= getPreferences(MODE_PRIVATE).getString("id","");
+        nameEditText.setText(id);
+        range= getPreferences(MODE_PRIVATE).getString("range","");
+        rangeEditText.setText(range);
+
         //FirebaseAuth.getInstance().signOut();  ///////// TO KEEP
 
 
@@ -86,7 +95,9 @@ public class loginActivity extends AppCompatActivity {
 //                password=passwordEditText.getText().toString();
 
                 id = nameEditText.getText().toString();
+                getPreferences(MODE_PRIVATE).edit().putString("id",id).commit();
                 range = rangeEditText.getText().toString();
+                getPreferences(MODE_PRIVATE).edit().putString("range",range).commit();
 
 
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) { //check if name and range are typed in
