@@ -21,13 +21,48 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@android:drawable/btn_dropdown"/>
 
+    <Button
+        android:id="@+id/description_button"
+        android:layout_width="256dp"
+        android:layout_height="42dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_shape"
+        android:text="Drill description"
+        android:textColor="@android:color/background_light"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ranges_spinner"/>
+
+    <TextView
+        android:id="@+id/description_textview"
+        android:layout_width="256dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center|center_vertical"
+        android:text=""
+        android:textColor="#F8F8F8"
+        android:textSize="18sp"
+        android:visibility="visible"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_button" />
+
     <EditText
         android:id="@+id/score_edittext"
         android:textColor="#FFFDFD"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:text=""
@@ -38,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/description_textview"/>
 
 
     <Button
@@ -59,17 +94,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/score_edittext"/>
 
+
     <TextView
         android:id="@+id/myscorestextview"
         android:layout_width="256dp"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:gravity="center|center_vertical"
         android:text="You dont have any score yet."
         android:textColor="#F8F8F8"
         android:textSize="18sp"
         android:visibility="visible"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,8 +28,8 @@ import static android.content.ContentValues.TAG;
 
 public class scoreActivity extends AppCompatActivity {
 
-    Button saveScoreButton,allScoresButton;
-    TextView myScores;
+    Button saveScoreButton,allScoresButton,descriptionButton;
+    TextView myScores,descriptionTextView;
     EditText editScore;
     Spinner spinner;
     String rangeId,clientId,chosenDrill="not changed yet",score="";
@@ -51,7 +52,11 @@ public class scoreActivity extends AppCompatActivity {
         editScore=findViewById(R.id.score_edittext);
         saveScoreButton=findViewById(R.id.savescore_button);
         myScores=findViewById(R.id.myscorestextview);
+        myScores.setMovementMethod(new ScrollingMovementMethod());
         allScoresButton=findViewById(R.id.allscoresbutton);
+        descriptionTextView=findViewById(R.id.description_textview);
+        descriptionTextView.setMovementMethod(new ScrollingMovementMethod());
+        descriptionButton=findViewById(R.id.description_button);
         final ArrayList<String> rangesList=new ArrayList<String>();
         rangesList.add("");
 
@@ -59,7 +64,7 @@ public class scoreActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        rangeIdDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() {
+        rangeIdDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() { //add drills to spinner
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
@@ -73,10 +78,10 @@ public class scoreActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Toast.makeText(scoreActivity.this, "Add new drill failed", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         rangeIdDb.child(rangeId).child("Name list").child(clientId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -99,6 +104,23 @@ public class scoreActivity extends AppCompatActivity {
         });
 
 
+        descriptionButton.setOnClickListener(new View.OnClickListener() { //get the description
+            @Override
+            public void onClick(View view) {
+
+                rangeIdDb.child(rangeId).child("Drill list").child(spinner.getSelectedItem().toString()).child("Description").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String description=dataSnapshot.getValue(String.class);
+                        descriptionTextView.setText(description);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) { }});
+            }
+        });
+
 
         saveScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,8 +142,8 @@ public class scoreActivity extends AppCompatActivity {
                 rangeIdDb.child(rangeId).child("Name list").child(clientId).child(chosenDrill).setValue(score);
 
                 refChild(rangeIdDb.child(rangeId), chosenDrill,clientId, score, chosenDrill);
-//                scoreCount=refChild(rangeIdDb.child(rangeId).child("Drill list"), chosenDrill );
-//                globalScore(rangeIdDb.child(rangeId).child("Global list").child(clientId), scoreCount, clientId, score, chosenDrill);
+
+
 
                 editScore.setText("");
                 Toast.makeText(scoreActivity.this, "Score saved", Toast.LENGTH_SHORT).show();}
@@ -139,17 +161,24 @@ public class scoreActivity extends AppCompatActivity {
             }
         });
     }
-    public void refChild(DatabaseReference db,String range,String clientId,String score,String chosenDrill){
+
+
+    public void refChild(DatabaseReference db,String range,String clientId,String score,String chosenDrill){ //getting the right num for specific drill
         final int[] count = {0};
         db.child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot ds) {
                 for(DataSnapshot data:ds.getChildren()){
                     if(data.getKey().equals(range)){
-                        Toast.makeText(scoreActivity.this, data.getKey(), Toast.LENGTH_SHORT).show();
-                        String scount=data.getValue(String.class);
-                        count[0]=Integer.valueOf(scount);
-                        globalScore(db.child("Global list").child(clientId), count[0], clientId, score, chosenDrill,clientId);
+                        db.child("Drill list").child(range).child("Num").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                String scount=dataSnapshot.getValue(String.class);
+                                count[0]=Integer.valueOf(scount);
+                                globalScore(db.child("Global list").child(clientId), count[0], clientId, score, chosenDrill,clientId);
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError error) { }});
                     }
                 }
             }

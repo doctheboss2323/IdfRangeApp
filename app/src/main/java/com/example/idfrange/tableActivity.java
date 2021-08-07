@@ -64,15 +64,24 @@ public class tableActivity extends AppCompatActivity {
         drillTextView10=findViewById(R.id.drill10textview);
 
 
-        nameDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() {
+        nameDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() { //Make the top row 'drill'
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds:snapshot.getChildren()){
                     try{
-                        String stcount=ds.getValue(String.class);
-                        int count=Integer.parseInt(stcount);
-                        setDrillValue(count,ds.getKey());}
-                    catch(Exception e){}
+                        String drillId=ds.getKey();
+
+                        //get the count
+                        nameDb.child(rangeId).child("Drill list").child(drillId).child("Num").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot NumDataSnapshot) {
+                                String stcount=NumDataSnapshot.getValue(String.class);
+                                int count=Integer.parseInt(stcount);
+                                setDrillValue(count,drillId);
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError error) {}});
+                    } catch(Exception e){}
                 }
             }
 

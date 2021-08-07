@@ -42,9 +42,6 @@ public class newRangeActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Enter range id",
                             Toast.LENGTH_LONG).show();}
                 else{
-//                    rangeIdDb.child(rnge).child("Drill list").setValue("");
-//                    rangeIdDb.child(rnge).child("Name list").setValue("");
-//                    rangeIdDb.child(rnge).child("Global list").setValue("");
                     rangeIdDb.child("Range list").child(rnge).setValue(rnge);
 
                     Intent profileIntent=new Intent(newRangeActivity.this, drillsActivity.class); // TO CHANGE
