@@ -1,4 +1,4 @@
-package com.example.idfrange;
+package com.lab_hall.idfrange;
 
 import android.content.Intent;
 
@@ -8,13 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +35,8 @@ public class tableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table);
+        View view =getLayoutInflater().inflate(R.layout.activity_table,null);
+        setContentView(view);
 
         //Initial work
         Intent intent=getIntent();
@@ -63,6 +58,26 @@ public class tableActivity extends AppCompatActivity {
         drillTextView9=findViewById(R.id.drill9textview);
         drillTextView10=findViewById(R.id.drill10textview);
 
+
+
+//        view.setOnClickListener(new View.OnClickListener() {   // make the view zoomable
+//            float zoomFactor = 2f;
+//            boolean zoomedOut = false;
+//
+//            @Override
+//            public void onClick(View v) {
+//                if(zoomedOut) {
+//                    v.setScaleX(1);
+//                    v.setScaleY(1);
+//                    zoomedOut = false;
+//                }
+//                else {
+//                    v.setScaleX(zoomFactor);
+//                    v.setScaleY(zoomFactor);
+//                    zoomedOut = true;
+//                }
+//            }
+//        });
 
         nameDb.child(rangeId).child("Drill list").addListenerForSingleValueEvent(new ValueEventListener() { //Make the top row 'drill'
             @Override

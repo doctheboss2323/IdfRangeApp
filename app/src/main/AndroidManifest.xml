@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.idfrange">
+    package="com.lab_hall.idfrange">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".scoreActivity"></activity>
+        <activity android:name=".positionsActivity"></activity>
+        <activity android:name=".scoreActivity" />
         <activity android:name=".newRangeActivity" />
         <activity android:name=".tableActivity" />
         <activity android:name=".drillsActivity" />
@@ -22,9 +23,9 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

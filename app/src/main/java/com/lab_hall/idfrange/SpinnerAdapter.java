@@ -1,4 +1,4 @@
-package com.example.idfrange;
+package com.lab_hall.idfrange;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -12,10 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.idfrange.R;
+import com.lab_hall.idfrange.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class SpinnerAdapter extends ArrayAdapter<String> {
 

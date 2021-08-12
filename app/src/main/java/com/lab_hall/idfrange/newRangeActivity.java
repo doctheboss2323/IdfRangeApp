@@ -1,8 +1,7 @@
-package com.example.idfrange;
+package com.lab_hall.idfrange;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -39,7 +38,7 @@ public class newRangeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String rnge=newrangeEditText.getText().toString();
                 if(TextUtils.isEmpty(rnge)){
-                    Toast.makeText(getApplicationContext(), "Enter range id",
+                    Toast.makeText(getApplicationContext(), "הקלד מטווח",
                             Toast.LENGTH_LONG).show();}
                 else{
                     rangeIdDb.child("Range list").child(rnge).setValue(rnge);

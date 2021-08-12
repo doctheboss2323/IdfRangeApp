@@ -1,4 +1,4 @@
-package com.example.idfrange;
+package com.lab_hall.idfrange;
 
 import org.junit.Test;
 

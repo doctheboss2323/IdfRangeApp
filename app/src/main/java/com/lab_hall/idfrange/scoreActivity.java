@@ -1,16 +1,15 @@
-package com.example.idfrange;
+package com.lab_hall.idfrange;
 
 import android.content.Intent;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import java.util.ArrayList;
 
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,15 +23,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static android.content.ContentValues.TAG;
-
 public class scoreActivity extends AppCompatActivity {
 
-    Button saveScoreButton,allScoresButton,descriptionButton;
-    TextView myScores,descriptionTextView;
+    Button saveScoreButton,allScoresButton,descriptionButton,positionsButton;
+    TextView myScores,descriptionTextView,spinnerTextView;
     EditText editScore;
     Spinner spinner;
-    String rangeId,clientId,chosenDrill="not changed yet",score="";
+    String rangeId,clientId,chosenDrill="עדיין לא שונה",score="";
     FirebaseDatabase firstDatabase= FirebaseDatabase.getInstance("https://idfrange-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference rangeIdDb=firstDatabase.getReference();
     int scoreCount;
@@ -57,6 +54,8 @@ public class scoreActivity extends AppCompatActivity {
         descriptionTextView=findViewById(R.id.description_textview);
         descriptionTextView.setMovementMethod(new ScrollingMovementMethod());
         descriptionButton=findViewById(R.id.description_button);
+        positionsButton=findViewById(R.id.positionsbutton);
+        spinnerTextView=findViewById(R.id.spinnertextview);
         final ArrayList<String> rangesList=new ArrayList<String>();
         rangesList.add("");
 
@@ -86,7 +85,7 @@ public class scoreActivity extends AppCompatActivity {
         rangeIdDb.child(rangeId).child("Name list").child(clientId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                myScores.setText("My scores: "+"\n");
+                myScores.setText("התוצאות שלי"+"\n");
                 myScores.append("\n");
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
                     try{
@@ -128,12 +127,12 @@ public class scoreActivity extends AppCompatActivity {
                 String chosenDrill = spinner.getSelectedItem().toString();
                 String score = editScore.getText().toString();
                 if (chosenDrill.equals("") || score.equals("")) {
-                    Toast.makeText(scoreActivity.this, "choose a drill and enter a score", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(scoreActivity.this, "בחר מקצה והכנס תוצאה", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 //"if' is used because of bug when first node of array is not added
                 if (Integer.parseInt(score) > 101) {
-                    Toast.makeText(scoreActivity.this, "enter score between 0 and 100", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(scoreActivity.this, "בחר תוצאה בין 0 ל100", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else{
@@ -146,7 +145,9 @@ public class scoreActivity extends AppCompatActivity {
 
 
                 editScore.setText("");
-                Toast.makeText(scoreActivity.this, "Score saved", Toast.LENGTH_SHORT).show();}
+                Toast.makeText(scoreActivity.this, "תוצאה נשמרה. כל הכבוד תותח/ית !!!", Toast.LENGTH_SHORT).show();
+                descriptionTextView.setText("");
+                }
             }
 
 
@@ -160,7 +161,29 @@ public class scoreActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        positionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(scoreActivity.this,positionsActivity.class);
+                startActivity(intent);
+            }
+        });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                if (!spinner.getSelectedItem().toString().equals("")) {
+                    spinnerTextView.setVisibility(View.INVISIBLE);
+                }
+
+            }
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+
     }
+
 
 
     public void refChild(DatabaseReference db,String range,String clientId,String score,String chosenDrill){ //getting the right num for specific drill

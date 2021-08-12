@@ -1,17 +1,10 @@
-package com.example.idfrange;
+package com.lab_hall.idfrange;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,8 +14,6 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,14 +27,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import static android.content.ContentValues.TAG;
 
 public class loginActivity extends AppCompatActivity {
     EditText emailEditText, passwordEditText,nameEditText,rangeEditText;
-    Button joinRangeButton,newRangeButton,firstTimeButton,firstTimeButton2;
+    Button joinRangeButton,newRangeButton,firstTimeButton,firstTimeButton2,revealButton,revealButton2;
     ImageView img;
     FirebaseAuth mAuth;
     String email,password,id,range;
@@ -55,7 +43,8 @@ public class loginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        View view=getLayoutInflater().inflate(R.layout.activity_login,null);
+        setContentView(view);
 
         //Initial work
         emailEditText = findViewById(R.id.email_edittext);
@@ -67,7 +56,15 @@ public class loginActivity extends AppCompatActivity {
         firstTimeButton = findViewById(R.id.firstTime_button);
         firstTimeButton2 = findViewById(R.id.firstTime2_button);
         img=findViewById(R.id.imageView);
+        revealButton=findViewById(R.id.revealnewrangebutton);
+        revealButton2=findViewById(R.id.revealjoinrangebutton);
+
         firstTimeButton2.setVisibility (View.INVISIBLE);
+        emailEditText.setVisibility(View.INVISIBLE);
+        passwordEditText.setVisibility(View.INVISIBLE);
+        newRangeButton.setVisibility(View.INVISIBLE);
+        revealButton2.setVisibility(View.INVISIBLE);
+
         mAuth = FirebaseAuth.getInstance();
         range="";
         id= getPreferences(MODE_PRIVATE).getString("id","");
@@ -79,13 +76,42 @@ public class loginActivity extends AppCompatActivity {
 
 
         firstTimeButton.setOnClickListener(new View.OnClickListener() {
-            //@SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 firstTimeButton.setVisibility (View.INVISIBLE);
                 firstTimeButton2.setVisibility (View.VISIBLE);
             }
         });
+
+
+
+        revealButton.setOnClickListener(new View.OnClickListener() {  //turn acitivity into making new range
+            @Override
+            public void onClick(View view) {
+                joinRangeButton.setVisibility(View.INVISIBLE);
+                revealButton.setVisibility (View.INVISIBLE);
+                rangeEditText.setVisibility(View.INVISIBLE);
+                revealButton2.setVisibility (View.VISIBLE);
+                emailEditText.setVisibility (View.VISIBLE);
+                passwordEditText.setVisibility (View.VISIBLE);
+                newRangeButton.setVisibility (View.VISIBLE);
+
+            }
+        });
+        revealButton2.setOnClickListener(new View.OnClickListener() { // turn it back to join range
+            @Override
+            public void onClick(View view) {
+                revealButton2.setVisibility (View.INVISIBLE);
+                revealButton.setVisibility (View.VISIBLE);
+                emailEditText.setVisibility (View.INVISIBLE);
+                passwordEditText.setVisibility (View.INVISIBLE);
+                newRangeButton.setVisibility (View.INVISIBLE);
+                rangeEditText.setVisibility(View.VISIBLE);
+                joinRangeButton.setVisibility(View.VISIBLE);
+
+            }
+        });
+
 
         joinRangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +127,7 @@ public class loginActivity extends AppCompatActivity {
 
 
                 if (TextUtils.isEmpty(id) || TextUtils.isEmpty(range)) { //check if name and range are typed in
-                    Toast.makeText(getApplicationContext(), "enter name and range Id",
+                    Toast.makeText(getApplicationContext(), "הכנס שם מלא ושם המטווח",
                             Toast.LENGTH_LONG).show();}
 
                  else {  // check if chosen range actually exist
@@ -115,7 +141,7 @@ public class loginActivity extends AppCompatActivity {
                                 profileIntent.putExtra("rangeId", rangeEditText.getText().toString());
                                 startActivity(profileIntent);
                             }
-                            else{Toast.makeText(loginActivity.this, "Range does not exist", Toast.LENGTH_SHORT).show();
+                            else{Toast.makeText(loginActivity.this, "המטווח לא קיים", Toast.LENGTH_SHORT).show();
                       }
                         }
                         @Override
@@ -143,7 +169,7 @@ public class loginActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
                 String id = nameEditText.getText().toString();
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(id)) {
-                    Toast.makeText(getApplicationContext(), "Enter email password and name to join",
+                    Toast.makeText(getApplicationContext(), "הכנס כתובת דוא״ל, שם משתמש וסיסמה כדי ליצור מטווח חדש",
                             Toast.LENGTH_LONG).show();
 
                     return;
@@ -156,14 +182,14 @@ public class loginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithEmail:success");
-                                    Toast.makeText(loginActivity.this, "Authentication sucessfull.",
+                                    Toast.makeText(loginActivity.this, "זיהוי בוצע בהצלחה",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     updateUInew(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(loginActivity.this, "Authentication failed.",
+                                    Toast.makeText(loginActivity.this, "זיהוי נכשל",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

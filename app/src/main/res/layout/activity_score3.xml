@@ -12,7 +12,7 @@
     <Spinner
         android:id="@+id/ranges_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="0dp"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,6 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@android:drawable/btn_dropdown"/>
+
+    <TextView
+        android:id="@+id/spinnertextview"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center|center_vertical"
+        android:text="בחר מקצה"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/description_button"
@@ -30,7 +44,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_shape"
-        android:text="Drill description"
+        android:text="הסבר למקצה הנבחר"
         android:textColor="@android:color/background_light"
         android:textSize="16sp"
         android:visibility="visible"
@@ -65,8 +79,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:text=""
-        android:hint="Drill score"
+        android:gravity="right"
+        android:hint="תוצאת המקצה"
         android:textColorHint="@android:color/tertiary_text_light"
         android:inputType="phone"
         android:layout_centerHorizontal="true"
@@ -85,7 +99,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_shape"
-        android:text="Save score"
+        android:text="שמור תוצאה"
         android:textColor="@android:color/background_light"
         android:textSize="16sp"
         android:visibility="visible"
@@ -102,7 +116,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:gravity="center|center_vertical"
-        android:text="You dont have any score yet."
+        android:text="עדיין אין לך תוצאות..."
         android:textColor="#F8F8F8"
         android:textSize="18sp"
         android:visibility="visible"
@@ -114,19 +128,35 @@
 
     <Button
         android:id="@+id/allscoresbutton"
-        android:layout_width="256dp"
-        android:layout_height="42dp"
+        android:layout_width="130dp"
+        android:layout_height="32dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
         android:textColor="@android:color/background_light"
         android:gravity="center|center_vertical"
-        android:text="All scores"
-        android:textSize="16sp"
+        android:text="טבלת תוצאות כללית"
+        android:textSize="13sp"
+        android:background="@drawable/button_shape"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myscorestextview"
+        />
+
+    <Button
+        android:id="@+id/positionsbutton"
+        android:layout_width="130dp"
+        android:layout_height="32dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:textColor="@android:color/background_light"
+        android:gravity="center|center_vertical"
+        android:text="הסברים על מצבים"
+        android:textSize="13sp"
         android:background="@drawable/button_shape"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myscorestextview" />
 
 
